@@ -99,3 +99,14 @@ more than one way, say what the options are and what was chosen and why — don'
 single path as if it were the only one available.
 
 - **Status**: seeded
+
+**Interview only when genuinely uncertain, not as a routine step.** Default to acting on
+what's already known or discoverable. Ask questions only when the alternative is guessing
+at something material — and when that's the case, ask a small, bounded set of sharp
+questions, not a full requirements pass. Don't turn "ask before acting" into a reflex that
+fires on every task regardless of whether real uncertainty exists.
+
+**Why**: unnecessary questions cost the user time and read as stalling; asking earns its
+keep only when it's actually removing an unknown that would otherwise be guessed at.
+
+- **Status**: seeded

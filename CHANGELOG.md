@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.1 — 2026-08-17
+
+- `skills/brain` — `ingest` now branches on greenfield targets (empty/near-empty
+  directory, or a project described but not yet on disk): instead of writing a
+  guessed `projects/<name>.md`, ask a small, bounded set of sharp questions
+  (2-4 — purpose, what it replaces/competes with, explicit non-goals) and write
+  the page from real answers. An existing project with real code/docs is still
+  investigated, not interviewed.
+- `templates/preferences.md` — new process-discipline entry, "interview only
+  when genuinely uncertain, not as a routine step," which the greenfield
+  branch cites — keeps the new branch from becoming a reason to interview on
+  every ingest.
+
 ## 0.2.0 — 2026-08-17
 
 - `templates/preferences.md` — new wiki-root file for working-style memory

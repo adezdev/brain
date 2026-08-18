@@ -60,6 +60,15 @@ its `index.md` row, cross-link it into any relevant `concepts/` page with a `[[w
 and append to `log.md`. Only write a `projects/*.md` page after real investigation — a
 project that hasn't been opened gets a one-liner in `index.md` and nothing more.
 
+*Greenfield branch*: if the target is empty or near-empty on disk, or the user is describing
+a project that doesn't exist yet, there's nothing to investigate — don't write a guessed
+`projects/<name>.md` from the description alone. This is the case `preferences.md`'s
+"interview only when genuinely uncertain" entry is for: ask a small, bounded set of sharp
+questions (2-4, not a full requirements doc) — what it's for, what it's replacing or
+competing with (if anything), and any explicit non-goals — then write the page from the real
+answers. An existing project with real code or docs still gets investigated, not
+interviewed; this branch is specifically for "nothing to read yet."
+
 **Lint** — asked "what's going on across my projects" or run periodically: scan for stale
 project pages (dirs that no longer exist), overlapping projects not yet cross-linked into a
 concept page, and entries still marked unclassified. Report findings; don't silently
