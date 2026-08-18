@@ -1,9 +1,23 @@
 {
   "name": "brain",
   "description": "A persistent, git-versioned cross-project knowledge wiki for Claude Code — compile what you learn about a project, and about how you like to work, once each, keep it current, and stop re-deriving context from scratch every session.",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "author": {
     "name": "adezdev"
   },
-  "keywords": ["memory", "wiki", "knowledge-base", "cross-project", "context", "preferences"]
+  "keywords": ["memory", "wiki", "knowledge-base", "cross-project", "context", "preferences"],
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/brain-statusline-nudge.js\"",
+            "timeout": 5,
+            "statusMessage": "Checking brain statusline setup..."
+          }
+        ]
+      }
+    ]
+  }
 }

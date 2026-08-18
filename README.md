@@ -18,6 +18,7 @@
   <a href="#receipts">Receipts</a> ·
   <a href="#the-tradeoff">The tradeoff</a> ·
   <a href="#install">Install</a> ·
+  <a href="#statusline">Statusline</a> ·
   <a href="#license">License</a>
 </p>
 
@@ -113,9 +114,41 @@ Local clone: point the first command at the directory instead.
 Copy `skills/brain/` and `skills/receipts/` into `.claude/skills/` (project) or
 `~/.claude/skills/` (global — recommended, this spans every project on the machine),
 `templates/` alongside. Replace `${CLAUDE_PLUGIN_ROOT}` with the real path to `templates/`
-in your copy.
+in your copy. The statusline (see [Statusline](#statusline)) isn't part of the skill install —
+it's a separate `settings.json` entry pointing at `hooks/brain-statusline.sh` or `.ps1`.
 
 </details>
+
+## Statusline
+
+`[BRAIN]` in the status bar when a wiki is found at the resolved location, plus a real
+project count (`projects/*.md`, counted fresh on every render — never cached, never
+estimated). Nothing rendered when no wiki exists yet — safe on fresh installs.
+
+Plugin install: Claude offers to wire this up on first session, same as it would for any
+other statusline-carrying plugin. Standalone install, or to wire it by hand:
+
+```json
+{
+  "statusLine": { "type": "command", "command": "bash /path/to/hooks/brain-statusline.sh" }
+}
+```
+
+Windows:
+
+```json
+{
+  "statusLine": { "type": "command", "command": "powershell -ExecutionPolicy Bypass -File C:\\path\\to\\hooks\\brain-statusline.ps1" }
+}
+```
+
+Add whichever line matches your platform to `~/.claude/settings.json`
+(`%USERPROFILE%\.claude\settings.json` on Windows). Wiki lives somewhere other than
+`~/brain`? Set `BRAIN_WIKI_DIR` before Claude Code starts — the script has no conversation
+to ask, so an env var is the only way it can know.
+
+Both scripts refuse to follow a symlinked wiki root or schema file, cap what they read, and
+render nothing rather than guess when the wiki or its `projects/` directory isn't there.
 
 ## Default wiki location
 
@@ -136,6 +169,7 @@ default path.
 <a href="skills/brain/SKILL.md">brain skill</a> ·
 <a href="skills/receipts/SKILL.md">receipts skill</a> ·
 <a href="templates/">wiki templates</a> ·
+<a href="hooks/">statusline hooks</a> ·
 <a href="CHANGELOG.md">Changelog</a> ·
 <a href="LICENSE">License</a>
 </sub>

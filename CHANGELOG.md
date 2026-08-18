@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.5.0 — 2026-08-18
+
+- `hooks/brain-statusline.sh` / `.ps1` — new statusline scripts, modeled on
+  the caveman and ponytail plugins' hardening pattern: refuse symlinks on
+  the wiki root and its schema file, hard-cap bytes read, never echo file
+  contents (only numbers computed locally get rendered), exit 0 with empty
+  output when no wiki exists yet. Shows `[BRAIN]` when a wiki is found at
+  the resolved location (`~/brain`, or `$BRAIN_WIKI_DIR` if set), plus a
+  real `projects/*.md` count taken fresh on every render — no cached or
+  estimated number, same discipline `receipts` already holds.
+- `hooks/brain-statusline-nudge.js` — SessionStart hook, wired into
+  `.claude-plugin/plugin.json`. Claude Code plugins can't declare
+  `statusLine` directly, so this is the same one-shot nudge pattern
+  caveman/ponytail use: if no `statusLine` is configured yet, tell the
+  model to offer setting one up. Never writes `settings.json` itself.
+- `README.md` — new Statusline section documenting the manual
+  `~/.claude/settings.json` wiring for both platforms, for non-plugin-system
+  installs.
+
 ## 0.4.4 — 2026-08-18
 
 - `README.md` — added a one-line disclaimer under License: direction is
