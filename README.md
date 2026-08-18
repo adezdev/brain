@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" alt="brain" width="200">
+  <img src="assets/brain.png" alt="brain" width="200">
 </p>
 
 # Brain

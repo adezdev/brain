@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.2 — 2026-08-18
+
+- `README.md` — logo path fixed to the real file (`assets/brain.png`), not
+  the placeholder `logo.png` at the repo root.
+
 ## 0.4.1 — 2026-08-18
 
 - `README.md` — rewritten in a terser, more declarative voice. Content
