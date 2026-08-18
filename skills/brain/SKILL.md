@@ -96,6 +96,15 @@ trace is exactly the write-back failure this loop exists to avoid. Don't silentl
 structural stuff without saying so; reporting is the deliverable, restructuring only happens
 if asked.
 
+Also check for bloat: `index.md`, `preferences.md`, and any `concepts/*.md` page exist to
+make reading cheaper than re-deriving — a page that's grown large enough that reading it
+stops being cheap relative to what it prevents has inverted its own purpose. Flag one that's
+ballooned with repetitive entries, superseded rows never removed, or a `preferences.md`
+entry that's been `corrected` multiple times without the earlier versions being folded away.
+This is a report-only finding like the rest of lint — note which page and roughly why (a real
+observation, e.g. "index.md lists the same project twice under two different category
+headings," not a guessed word count or a made-up size threshold); don't prune unprompted.
+
 **Feedback** — the user corrects an approach ("no, don't do that," "stop doing X") or
 confirms a non-obvious one worked ("yes, exactly," accepting something unusual without
 pushback): read `preferences.md` first to find whether a matching entry already exists — a

@@ -22,7 +22,15 @@ happened, not just a record that an ingest occurred. Look for:
 
 - **Rework avoided** — a query entry where an existing `projects/` or `concepts/` page
   answered a question that would otherwise have required re-reading a project from scratch,
-  especially if the entry notes something like "already exists" or "already decided."
+  especially if the entry notes something like "already exists" or "already decided." Where
+  it's available, state the concrete size comparison: what was actually read to answer the
+  query, measured at report time (real line counts of the `index.md`/`concepts/*.md` pages
+  consulted), against what a re-scan would have touched (the number of project directories or
+  files the query would otherwise have needed to open — only when that number is itself
+  concretely knowable, e.g. from `index.md`'s own row count, not guessed). Never estimate
+  tokens, dollars, or hours saved — if the comparison can't be made from real numbers in front
+  of you, state the rework-avoided finding without a size comparison rather than inventing
+  one.
 - **A contradiction caught** — an entry (often a `lint` or `ingest` correction) where new
   information conflicted with something the wiki already held, and the wiki flagged it
   instead of silently drifting between two inconsistent stories across sessions.
@@ -51,8 +59,9 @@ hours" — that number would be invented. State what happened and let it speak f
 receipts — 4 found (from 23 log entries, 2026-08-17 to present)
 
   rework avoided     query on "have I built a Rust TUI before" answered directly from
-                      index.md — 6 existing projects surfaced, no re-scan needed
-                      (log: 2026-08-17 query)
+                      index.md — 6 existing projects surfaced, no re-scan needed.
+                      Answered from 40 lines of index.md, not a re-read across the
+                      6 project directories it names (log: 2026-08-17 query)
 
   contradiction caught   ingest of <project> found its docs described a different,
                       external product than the one already on record — corrected

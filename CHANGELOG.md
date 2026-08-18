@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.4.0 — 2026-08-18
+
+- `skills/receipts` — "rework avoided" findings now state the concrete size
+  comparison where it's available: real line counts of the pages actually
+  read against a re-scan's real project/file count, both measured at report
+  time. Never a guessed token/dollar/hour figure — omitted entirely when the
+  comparison can't be made from real numbers.
+- `skills/brain` — `lint` gained a bloat check: flags `index.md`,
+  `preferences.md`, or a `concepts/*.md` page that's grown large enough that
+  reading it is no longer cheap relative to what it prevents (repetitive or
+  superseded entries, duplicate rows). Report-only, same as the rest of
+  lint — no auto-pruning.
+- `README.md` — new paragraph stating the honest tradeoff: real savings from
+  avoided re-scanning/rebuilding, but reading the wiki isn't free and an
+  unbounded one eventually costs more than it saves — not sold as an
+  optimization engine, an avoided-waste mechanism with a maintenance cost.
+
 ## 0.3.0 — 2026-08-17
 
 - `skills/brain` — named the mechanic that was previously only implicit: every

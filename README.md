@@ -82,6 +82,14 @@ already knew, a contradiction it caught, a preference it applied correctly witho
 re-told. No invented metrics — a concrete, sourced list, or an honest "nothing distinctive
 yet" if the log doesn't support one.
 
+The honest tradeoff: the wiki avoids redundant re-scanning and redundant rebuilding — that's
+the real saving, and `receipts` only ever states it in real terms (lines actually read,
+projects actually named), never an invented hours/dollars figure. But reading the wiki isn't
+free, and an unbounded one eventually costs more to read than it saves — this isn't an
+optimization engine, it's an avoided-waste mechanism with an ordinary maintenance cost. That's
+why `lint` includes a bloat check: a page that's grown large enough that reading it stops
+being cheap relative to what it prevents gets flagged, not silently left to grow.
+
 See `skills/brain/SKILL.md` and `skills/receipts/SKILL.md` for the full workflow definitions
 and ground rules, and `templates/` for the schema a fresh wiki bootstraps with.
 
