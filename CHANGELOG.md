@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1 — 2026-08-18
+
+- `README.md` — rewritten in a terser, more declarative voice. Content
+  unchanged (Karpathy pitch, the loop, `preferences.md`, `receipts`, install,
+  default wiki location) — cut the hedging and over-explaining. Added a
+  centered logo slot at the top pointing at `logo.png` (not included; drop
+  the file in to render it).
+
 ## 0.4.0 — 2026-08-18
 
 - `skills/receipts` — "rework avoided" findings now state the concrete size

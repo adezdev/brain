@@ -1,97 +1,83 @@
+<p align="center">
+  <img src="logo.png" alt="brain" width="200">
+</p>
+
 # Brain
 
-A pair of Claude Code skills that turn `~/brain` into a persistent, git-versioned
-cross-project knowledge wiki — of what your projects are, and of how you want to be worked
-with. Compile each once, keep both current, and stop re-deriving context from raw files
-every session.
+Turns `~/brain` into a persistent, git-versioned wiki — of your projects, and of how you
+work. Two Claude Code skills. Compile it once, keep it current, stop re-deriving context
+from scratch every session.
 
 ## Why
 
-- A stateless agent re-scans your filesystem from zero every session. Ask it "what have I
-  built before" or "what did I decide about X" and it either doesn't know or has to re-read
-  everything to find out.
-- [Karpathy's LLM wiki
-  pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) fixes this:
-  instead of RAG-over-raw-files, an LLM compiles what it learns into linked markdown pages
-  once, and reads that back next time instead of re-deriving it.
-- Most "memory" tools stop at project facts. A rule file that just says "be terse" or "apply
-  YAGNI" is a commodity — every agent ships one, and it never moves. The differentiator here
-  is that `brain` remembers working style too — communication, code philosophy, process
-  discipline — starting from sensible defaults and getting sharpened by real corrections and
-  confirmations, the same way project knowledge compounds. That memory travels to every
-  project, not just the one you happened to correct it in.
-- `brain` packages both halves as a skill: a fixed schema (`index.md`, `preferences.md`,
-  `log.md`, `projects/`, `concepts/`), four workflows (query / ingest / lint / feedback), and
-  a set of ground rules that keep the wiki honest — no copied source, no invented pages, no
-  silent restructuring.
-- A second skill, `receipts`, is the proof mechanism: it audits `log.md` for concrete moments
-  the wiki actually paid off — a rebuild avoided, a contradiction caught, a preference
-  applied without being re-stated — instead of just asserting the wiki is useful.
-- Plain markdown, git-versioned, Obsidian-compatible (`[[wikilink]]` syntax keeps the graph
-  view connected). No database, no embeddings — the gist's own argument is that this scales
-  further than it looks before either is needed.
+Stateless agents forget everything between sessions. Ask "have I built this before" and you
+get a filesystem re-scan. Every time.
 
-## What it does
+[Karpathy's LLM wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
+fixes that: compile what you learn into linked markdown, read it back instead of
+re-deriving it.
 
-Once installed, the `brain` skill auto-surfaces whenever a request references multiple
-projects, asks what already exists or what you decided before, corrects or confirms an
-approach worth remembering, or hands the model something worth keeping past the current
-session. On first use it bootstraps a wiki at `~/brain` from the templates in this plugin; on
-every later use it reads `~/brain/CLAUDE.md` — the wiki's own schema, which may have evolved
-past the bootstrap defaults — and follows it.
+Most memory tools stop at project facts. A rule file that says "be terse" is a commodity —
+every agent ships one, none of them move. Brain remembers working style too: communication,
+code philosophy, process discipline. Starts from seeded defaults. Gets sharpened by real
+corrections and confirmations. Travels to every project, not just the one you corrected it
+in.
 
-Every workflow below is one turn of the same loop: check the wiki before acting, act, then
-write back anything worth keeping. Both halves are mandatory — a workflow that only writes is
-a diary nobody re-reads, and one that only reads loses whatever it just learned the moment
-the session ends. That read-before-act, write-back-after shape is the whole mechanism; it's
-what turns this into compounding memory instead of notes nobody revisits.
+Plain markdown. Git-versioned. Obsidian-compatible — `[[wikilinks]]` keep the graph
+connected. No database, no embeddings. Not until the index itself stops being enough.
+
+## The loop
+
+Every workflow is one turn of the same loop: check the wiki before acting, act, write back
+what's worth keeping. Both halves mandatory. Write without reading it back next session —
+that's a diary nobody opens. Read without writing back — you lose what you just learned.
+Skip either half, the loop stops compounding.
 
 ```
 ~/brain/
-  CLAUDE.md           the wiki's schema: layout, workflows, ground rules
-  index.md            catalog of every known project — path, category, one-liner, status
-  preferences.md      working-style memory — communication, code philosophy, process
-  log.md              append-only history of ingest/query/lint/feedback events
+  CLAUDE.md           the wiki's schema — layout, workflows, ground rules
+  index.md            every known project — path, category, one-liner, status
+  preferences.md      working-style memory — communication, code, process
+  log.md              append-only history of every workflow run
   projects/<name>.md  deep pages, written only after real investigation
-  concepts/<name>.md  cross-project synthesis pages
+  concepts/<name>.md  cross-project synthesis
 ```
 
-**Query** — a question spans projects: read `index.md` and relevant `concepts/*.md` first,
-instead of re-scanning the filesystem.
+**Query** — spans projects. Read `index.md` and relevant `concepts/*.md` first. No re-scan.
 
-**Ingest** — pointed at a project: read its own docs, write or update its `projects/` page,
-update `index.md`, cross-link relevant `concepts/` pages, log it.
+**Ingest** — pointed at a project. Read its docs. Write or update its page. Update
+`index.md`. Cross-link. Log it. Nothing on disk yet? Ask 2-4 sharp questions instead of
+guessing — purpose, what it replaces, explicit non-goals — then write from real answers.
 
-**Lint** — periodic health check: stale pages, un-cross-linked overlaps, unclassified
-entries.
+**Lint** — periodic health check. Stale pages, un-cross-linked overlaps, unclassified
+entries, bloat. Reports; doesn't restructure without being asked.
 
 **Feedback** — a correction ("no, don't do that") or a confirmation ("yes, exactly") updates
-`preferences.md` with the rule *and* the why behind it, marked `corrected` or `confirmed` so
-a later session can judge an edge case instead of blindly pattern-matching. This is what
-turns `preferences.md`'s seeded defaults into something actually earned rather than a static
-list.
+`preferences.md`: the rule and the why, marked `corrected` or `confirmed`. This is what
+turns seeded defaults into something earned.
 
-`preferences.md` ships seeded with a starting ruleset — terse, answer-first communication; a
-YAGNI ladder for new code; plan-before-acting and verify-before-declaring-done process
-discipline — written explicitly as defaults meant to be overwritten by real feedback, not
-followed blindly forever.
+`preferences.md` ships seeded: terse communication, a YAGNI ladder, plan-before-acting,
+verify-before-done. Defaults, not laws — meant to be overwritten by real feedback.
 
-**`receipts`** (a second skill in this plugin) — ask "what has this actually saved me" and it
-walks `log.md` for verifiable, still-current evidence: rework avoided because the wiki
-already knew, a contradiction it caught, a preference it applied correctly without being
-re-told. No invented metrics — a concrete, sourced list, or an honest "nothing distinctive
-yet" if the log doesn't support one.
+Full workflow definitions and ground rules: `skills/brain/SKILL.md`. Bootstrap schema:
+`templates/`.
 
-The honest tradeoff: the wiki avoids redundant re-scanning and redundant rebuilding — that's
-the real saving, and `receipts` only ever states it in real terms (lines actually read,
-projects actually named), never an invented hours/dollars figure. But reading the wiki isn't
-free, and an unbounded one eventually costs more to read than it saves — this isn't an
-optimization engine, it's an avoided-waste mechanism with an ordinary maintenance cost. That's
-why `lint` includes a bloat check: a page that's grown large enough that reading it stops
-being cheap relative to what it prevents gets flagged, not silently left to grow.
+## receipts
 
-See `skills/brain/SKILL.md` and `skills/receipts/SKILL.md` for the full workflow definitions
-and ground rules, and `templates/` for the schema a fresh wiki bootstraps with.
+The proof mechanism. Ask "what has this actually saved me" and it walks `log.md` for
+concrete, still-current evidence — rework avoided, a contradiction caught, a preference
+applied without being re-stated. Real numbers only: lines actually read, projects actually
+named. Never an invented hours/dollars figure. Nothing distinctive in the log, it says so —
+a padded list is worse than an honest one.
+
+Full definition: `skills/receipts/SKILL.md`.
+
+## The tradeoff
+
+Real saving: no redundant re-scanning, no redundant rebuilding. Real cost: reading the wiki
+isn't free, and an unbounded one eventually costs more than it saves. That's why `lint`
+checks for bloat — a page grown past cheap-to-read gets flagged, not left to grow silently.
+Not an optimization engine. An avoided-waste mechanism with a maintenance cost.
 
 ## Install
 
@@ -100,20 +86,19 @@ and ground rules, and `templates/` for the schema a fresh wiki bootstraps with.
 /plugin install brain@brain
 ```
 
-From a local clone, point the first command at the directory instead.
+Local clone: point the first command at the directory instead.
 
-Manual alternative, no plugin system involved: copy `skills/brain/` and `skills/receipts/`
-into `.claude/skills/` (project-level) or `~/.claude/skills/` (global — recommended, since
-this is meant to span every project on the machine), and `templates/` alongside them so the
-bootstrap step can find `${CLAUDE_PLUGIN_ROOT}/templates/*` — when installed manually outside
-the plugin system, replace that variable with the actual path to `templates/` in your copy.
+No plugin system: copy `skills/brain/` and `skills/receipts/` into `.claude/skills/`
+(project) or `~/.claude/skills/` (global — recommended, this spans every project on the
+machine), `templates/` alongside. Replace `${CLAUDE_PLUGIN_ROOT}` with the real path to
+`templates/` in your copy.
 
 ## Default wiki location
 
-`~/brain` — `$HOME/brain` on macOS/Linux, `%USERPROFILE%\brain` on Windows. If you already
-keep a wiki somewhere else, tell the model where it lives; the skill follows whatever
-`CLAUDE.md` it finds there rather than assuming the default path is authoritative.
+`~/brain`. `$HOME/brain` on macOS/Linux, `%USERPROFILE%\brain` on Windows. Wiki lives
+elsewhere — tell the model where. It follows whatever `CLAUDE.md` it finds there, not the
+default path.
 
 ## License
 
-MIT. See [CHANGELOG.md](CHANGELOG.md) for what changed when.
+MIT. `CHANGELOG.md` for what changed when.
