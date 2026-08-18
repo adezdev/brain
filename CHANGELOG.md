@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.4 — 2026-08-18
+
+- `README.md` — added a one-line disclaimer under License: direction is
+  adezdev's, implementation is Claude's, and the project is maintained that
+  way.
+
 ## 0.4.3 — 2026-08-18
 
 - `README.md` — restructured to match the README conventions of two public

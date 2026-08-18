@@ -127,6 +127,8 @@ default path.
 
 [MIT](LICENSE). See [`CHANGELOG.md`](CHANGELOG.md) for what changed when.
 
+<sub>Direction and decisions: adezdev. Implementation, including this README: Claude. Still built that way.</sub>
+
 ---
 
 <sub>
