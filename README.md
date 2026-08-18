@@ -40,6 +40,12 @@ session. On first use it bootstraps a wiki at `~/brain` from the templates in th
 every later use it reads `~/brain/CLAUDE.md` — the wiki's own schema, which may have evolved
 past the bootstrap defaults — and follows it.
 
+Every workflow below is one turn of the same loop: check the wiki before acting, act, then
+write back anything worth keeping. Both halves are mandatory — a workflow that only writes is
+a diary nobody re-reads, and one that only reads loses whatever it just learned the moment
+the session ends. That read-before-act, write-back-after shape is the whole mechanism; it's
+what turns this into compounding memory instead of notes nobody revisits.
+
 ```
 ~/brain/
   CLAUDE.md           the wiki's schema: layout, workflows, ground rules

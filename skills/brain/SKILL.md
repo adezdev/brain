@@ -45,43 +45,67 @@ If `~/brain` doesn't exist yet (or exists but has no `CLAUDE.md`), bootstrap it:
 - `concepts/<name>.md` — cross-cutting synthesis pages linking multiple projects around a
   shared theme.
 
+## The loop
+
+Every workflow below is one turn of the same loop: **check the wiki before acting, act, then
+write back anything worth keeping.** Both halves are mandatory, not optional — a workflow
+that writes without ever being read back next session is a diary nobody re-reads; a workflow
+that reads without writing back loses whatever it just learned the moment the session ends.
+Skip either half and the loop stops compounding: no read means the next session starts from
+zero, no write means it repeats the same discovery. Read this section as the check against
+every workflow that follows — if one of them seems to only do half the loop, that's a bug in
+this file, not a variant to allow.
+
 ## The four workflows
 
 **Query** — a question spans projects, or references something that would otherwise need a
-filesystem re-scan: read `index.md` and the relevant `concepts/*.md` first. If real digging
-was needed to answer, file it back (new project page, or an update to a concept page) and
-append one line to `log.md`.
+filesystem re-scan: read `index.md` and the relevant `concepts/*.md` first (the read half —
+this is what makes a query cheap instead of a re-scan). If real digging was needed to answer,
+file it back (new project page, or an update to a concept page) and append one line to
+`log.md` (the write half — skipping it means the next query pays the same digging cost
+again).
 
-**Ingest** — pointed at a project, or asked to properly look into one: read its own
-README/CLAUDE.md/AGENTS.md and skim its real structure (not just the one-liner in
-`index.md`, if it has one). Write or update `projects/<name>.md` with what was actually
-found — genuine distinguishing facts and gotchas, not a restatement of the README. Update
-its `index.md` row, cross-link it into any relevant `concepts/` page with a `[[wikilink]]`,
-and append to `log.md`. Only write a `projects/*.md` page after real investigation — a
-project that hasn't been opened gets a one-liner in `index.md` and nothing more.
+**Ingest** — pointed at a project, or asked to properly look into one: first check `index.md`
+for an existing row and any relevant `concepts/*.md` pages, so prior context (a cluster it
+belongs to, a one-liner already on record) isn't silently re-derived or contradicted. Then
+read the project's own README/CLAUDE.md/AGENTS.md and skim its real structure (not just the
+one-liner in `index.md`, if it has one). Write or update `projects/<name>.md` with what was
+actually found — genuine distinguishing facts and gotchas, not a restatement of the README.
+Update its `index.md` row, cross-link it into any relevant `concepts/` page with a
+`[[wikilink]]`, and append to `log.md`. Only write a `projects/*.md` page after real
+investigation — a project that hasn't been opened gets a one-liner in `index.md` and nothing
+more.
 
 *Greenfield branch*: if the target is empty or near-empty on disk, or the user is describing
 a project that doesn't exist yet, there's nothing to investigate — don't write a guessed
-`projects/<name>.md` from the description alone. This is the case `preferences.md`'s
-"interview only when genuinely uncertain" entry is for: ask a small, bounded set of sharp
-questions (2-4, not a full requirements doc) — what it's for, what it's replacing or
-competing with (if anything), and any explicit non-goals — then write the page from the real
-answers. An existing project with real code or docs still gets investigated, not
+`projects/<name>.md` from the description alone. Still do the read half first (`index.md`,
+relevant `concepts/*.md` — the project may already be on record from an earlier conversation
+even with nothing on disk yet). This is the case `preferences.md`'s "interview only when
+genuinely uncertain" entry is for: ask a small, bounded set of sharp questions (2-4, not a
+full requirements doc) — what it's for, what it's replacing or competing with (if anything),
+and any explicit non-goals — then write the page from the real answers, and finish with the
+same write half as any other ingest: `index.md` row, `concepts/` cross-link if relevant, and
+`log.md`. An existing project with real code or docs still gets investigated, not
 interviewed; this branch is specifically for "nothing to read yet."
 
-**Lint** — asked "what's going on across my projects" or run periodically: scan for stale
-project pages (dirs that no longer exist), overlapping projects not yet cross-linked into a
-concept page, and entries still marked unclassified. Report findings; don't silently
-restructure without saying so.
+**Lint** — asked "what's going on across my projects" or run periodically: the scan itself
+*is* the read half — stale project pages, overlapping projects not yet cross-linked, entries
+still marked unclassified. Report findings, and append a `log.md` entry summarizing what was
+found even when nothing gets restructured — a lint pass that finds real gaps but leaves no
+trace is exactly the write-back failure this loop exists to avoid. Don't silently fix
+structural stuff without saying so; reporting is the deliverable, restructuring only happens
+if asked.
 
 **Feedback** — the user corrects an approach ("no, don't do that," "stop doing X") or
 confirms a non-obvious one worked ("yes, exactly," accepting something unusual without
-pushback): update or add the relevant `preferences.md` entry. A correction gets marked
-`corrected` with the date and what prompted it; a confirmation gets marked `confirmed`.
-Capture the *why*, not just the *what* — that's what lets a future session judge an edge
-case instead of blindly pattern-matching a rule. This is the mechanism that turns
-`preferences.md`'s seeded defaults into something actually earned. Append one line to
-`log.md`, same as the other three workflows.
+pushback): read `preferences.md` first to find whether a matching entry already exists — a
+correction to something already `confirmed` is itself worth noting, not just overwritten
+silently. Then update or add the relevant entry. A correction gets marked `corrected` with
+the date and what prompted it; a confirmation gets marked `confirmed`. Capture the *why*, not
+just the *what* — that's what lets a future session judge an edge case instead of blindly
+pattern-matching a rule. This is the mechanism that turns `preferences.md`'s seeded defaults
+into something actually earned. Append one line to `log.md`, same as the other three
+workflows.
 
 ## Working conventions
 

@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0 — 2026-08-17
+
+- `skills/brain` — named the mechanic that was previously only implicit: every
+  workflow is one turn of a read-before-act, write-back-after loop, and both
+  halves are mandatory. New "The loop" section states this up front, before
+  the workflow list. Fixed workflows that were missing one half: `ingest` now
+  explicitly checks `index.md`/`concepts/*.md` before investigating a
+  project (including the greenfield branch, which previously skipped the
+  read and didn't spell out its own write-back); `lint` now appends a
+  `log.md` entry summarizing findings even when nothing gets restructured;
+  `feedback` now explicitly reads `preferences.md` first to check for an
+  existing matching entry before updating it.
+- `README.md` — "What it does" section states the same loop in one short
+  paragraph.
+
 ## 0.2.1 — 2026-08-17
 
 - `skills/brain` — `ingest` now branches on greenfield targets (empty/near-empty

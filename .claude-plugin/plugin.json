@@ -1,7 +1,7 @@
 {
   "name": "brain",
   "description": "A persistent, git-versioned cross-project knowledge wiki for Claude Code — compile what you learn about a project, and about how you like to work, once each, keep it current, and stop re-deriving context from scratch every session.",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "author": {
     "name": "adezdev"
   },
