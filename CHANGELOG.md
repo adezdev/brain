@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.3 — 2026-08-18
+
+- `README.md` — restructured to match the README conventions of two public
+  Claude Code skills (`caveman` by Julius Brussee, `ponytail` by Dietrich
+  Gebert): a centered logo, a one-line tagline under it, a license badge, an
+  anchor-link nav row, an `---` divider, sentence-case section headers, a
+  collapsible `<details>` block for the manual-install path, and a short
+  docs footer. Content unchanged — same pitch, same loop, same workflows,
+  same install instructions and default wiki location.
+
 ## 0.4.2 — 2026-08-18
 
 - `README.md` — logo path fixed to the real file (`assets/brain.png`), not

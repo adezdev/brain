@@ -2,7 +2,26 @@
   <img src="assets/brain.png" alt="brain" width="200">
 </p>
 
-# Brain
+<h1 align="center">Brain</h1>
+
+<p align="center">
+  <strong>Check first. Act once. Write it down.</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-blue?style=flat" alt="MIT license">
+</p>
+
+<p align="center">
+  <a href="#why">Why</a> ·
+  <a href="#the-loop">The loop</a> ·
+  <a href="#receipts">Receipts</a> ·
+  <a href="#the-tradeoff">The tradeoff</a> ·
+  <a href="#install">Install</a> ·
+  <a href="#license">License</a>
+</p>
+
+---
 
 Turns `~/brain` into a persistent, git-versioned wiki — of your projects, and of how you
 work. Two Claude Code skills. Compile it once, keep it current, stop re-deriving context
@@ -59,10 +78,10 @@ turns seeded defaults into something earned.
 `preferences.md` ships seeded: terse communication, a YAGNI ladder, plan-before-acting,
 verify-before-done. Defaults, not laws — meant to be overwritten by real feedback.
 
-Full workflow definitions and ground rules: `skills/brain/SKILL.md`. Bootstrap schema:
-`templates/`.
+Full workflow definitions and ground rules: [`skills/brain/SKILL.md`](skills/brain/SKILL.md).
+Bootstrap schema: [`templates/`](templates/).
 
-## receipts
+## Receipts
 
 The proof mechanism. Ask "what has this actually saved me" and it walks `log.md` for
 concrete, still-current evidence — rework avoided, a contradiction caught, a preference
@@ -70,7 +89,7 @@ applied without being re-stated. Real numbers only: lines actually read, project
 named. Never an invented hours/dollars figure. Nothing distinctive in the log, it says so —
 a padded list is worse than an honest one.
 
-Full definition: `skills/receipts/SKILL.md`.
+Full definition: [`skills/receipts/SKILL.md`](skills/receipts/SKILL.md).
 
 ## The tradeoff
 
@@ -81,17 +100,22 @@ Not an optimization engine. An avoided-waste mechanism with a maintenance cost.
 
 ## Install
 
-```
+```bash
 /plugin marketplace add adezdev/brain
 /plugin install brain@brain
 ```
 
 Local clone: point the first command at the directory instead.
 
-No plugin system: copy `skills/brain/` and `skills/receipts/` into `.claude/skills/`
-(project) or `~/.claude/skills/` (global — recommended, this spans every project on the
-machine), `templates/` alongside. Replace `${CLAUDE_PLUGIN_ROOT}` with the real path to
-`templates/` in your copy.
+<details>
+<summary>Manual install, no plugin system</summary>
+
+Copy `skills/brain/` and `skills/receipts/` into `.claude/skills/` (project) or
+`~/.claude/skills/` (global — recommended, this spans every project on the machine),
+`templates/` alongside. Replace `${CLAUDE_PLUGIN_ROOT}` with the real path to `templates/`
+in your copy.
+
+</details>
 
 ## Default wiki location
 
@@ -101,4 +125,15 @@ default path.
 
 ## License
 
-MIT. `CHANGELOG.md` for what changed when.
+[MIT](LICENSE). See [`CHANGELOG.md`](CHANGELOG.md) for what changed when.
+
+---
+
+<sub>
+<strong>Docs:</strong>
+<a href="skills/brain/SKILL.md">brain skill</a> ·
+<a href="skills/receipts/SKILL.md">receipts skill</a> ·
+<a href="templates/">wiki templates</a> ·
+<a href="CHANGELOG.md">Changelog</a> ·
+<a href="LICENSE">License</a>
+</sub>
