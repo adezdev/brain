@@ -17,8 +17,12 @@ everything else, without re-deriving it from scratch or being told again.
 
 - [[index]] — catalog of every known project: path, category, one-line summary, status. The
   entry point. Read this first when a question references "my projects" broadly.
-- [[log]] — append-only. One line per ingest/query/lint event. Never edit past entries, only
-  append. Format: `YYYY-MM-DD [ingest|query|lint] short description`.
+- [[preferences]] — working-style memory: communication, code philosophy, process
+  discipline. Not project facts — how the user wants to be worked with, and it applies
+  everywhere, not just in this repo. Starts from seeded defaults and gets sharpened by real
+  feedback; see the `feedback` workflow below.
+- [[log]] — append-only. One line per ingest/query/lint/feedback event. Never edit past
+  entries, only append. Format: `YYYY-MM-DD [ingest|query|lint|feedback] short description`.
 - `projects/<name>.md` — one page per project the wiki has actually investigated (entity
   pages). Not every project in `index.md` needs one yet — only write one after actually
   looking at the project, not from the one-liner alone.
@@ -43,6 +47,14 @@ stale project pages (referenced dirs that no longer exist), duplicate/overlappin
 that haven't been cross-linked into a concept page yet, and projects in `index.md` still
 marked `unclassified`. Report findings, don't silently fix structural stuff without saying
 so.
+
+**Feedback** (the user corrects an approach, or confirms a non-obvious one worked): a
+correction — "no, don't do that," "stop doing X" — updates or adds a `preferences.md` entry
+marked `corrected`, with the date and what prompted it. A confirmation — "yes, exactly,"
+or accepting an unusual choice without pushback — does the same but marked `confirmed`
+rather than corrected. Either way, capture *why*, not just what: the reasoning is what lets
+a future session judge an edge case instead of blindly pattern-matching a rule. Log every
+feedback event to `log.md`, same as the other three workflows.
 
 ## Ground rules
 

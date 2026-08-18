@@ -1,6 +1,6 @@
 ---
 name: brain
-description: A persistent, cross-project knowledge wiki. Use when the user references a personal knowledge base or notes spanning multiple projects, asks something that spans multiple projects ("what have I done before", "what already exists", "what did I decide about X"), points you at a project to investigate/remember, or when you learn something about a project worth keeping past this session. Also use when asked to set up, bootstrap, or check the wiki itself.
+description: A persistent, cross-project knowledge wiki — of project facts and of how the user wants to be worked with. Use when the user references a personal knowledge base or notes spanning multiple projects, asks something that spans multiple projects ("what have I done before", "what already exists", "what did I decide about X"), points you at a project to investigate/remember, corrects or confirms an approach worth remembering, or when you learn something worth keeping past this session. Also use when asked to set up, bootstrap, or check the wiki itself.
 ---
 
 # brain — cross-project knowledge wiki
@@ -24,24 +24,28 @@ exists.
 If `~/brain` doesn't exist yet (or exists but has no `CLAUDE.md`), bootstrap it:
 
 1. Create `~/brain/` (and `~/brain/projects/`, `~/brain/concepts/`) if missing.
-2. Copy `${CLAUDE_PLUGIN_ROOT}/templates/CLAUDE.md`, `templates/index.md`, and
-   `templates/log.md` into place, unless a same-named file already exists there (never
-   overwrite real content).
+2. Copy `${CLAUDE_PLUGIN_ROOT}/templates/CLAUDE.md`, `templates/index.md`,
+   `templates/log.md`, and `templates/preferences.md` into place, unless a same-named file
+   already exists there (never overwrite real content).
 3. `git init` if `~/brain` isn't already a repo, then commit the bootstrap
    (`git add -A && git commit -m "bootstrap brain wiki"`).
 4. Tell the user this is a fresh wiki and ask what to start with, rather than guessing a
-   project catalog out of thin air.
+   project catalog out of thin air. Mention that `preferences.md` starts from seeded
+   defaults meant to be sharpened by real feedback, not treated as fixed.
 
 ## Layout
 
 - `CLAUDE.md` — the wiki's own schema (layout, workflows, ground rules in full).
 - `index.md` — catalog of every known project, by category.
+- `preferences.md` — working-style memory: communication, code philosophy, process
+  discipline. How the user wants to be worked with, not project facts — applies across
+  every project, not just the one in front of you.
 - `log.md` — append-only history of what's been done in the wiki.
 - `projects/<name>.md` — deep pages, written only after real investigation.
 - `concepts/<name>.md` — cross-cutting synthesis pages linking multiple projects around a
   shared theme.
 
-## The three workflows
+## The four workflows
 
 **Query** — a question spans projects, or references something that would otherwise need a
 filesystem re-scan: read `index.md` and the relevant `concepts/*.md` first. If real digging
@@ -60,6 +64,15 @@ project that hasn't been opened gets a one-liner in `index.md` and nothing more.
 project pages (dirs that no longer exist), overlapping projects not yet cross-linked into a
 concept page, and entries still marked unclassified. Report findings; don't silently
 restructure without saying so.
+
+**Feedback** — the user corrects an approach ("no, don't do that," "stop doing X") or
+confirms a non-obvious one worked ("yes, exactly," accepting something unusual without
+pushback): update or add the relevant `preferences.md` entry. A correction gets marked
+`corrected` with the date and what prompted it; a confirmation gets marked `confirmed`.
+Capture the *why*, not just the *what* — that's what lets a future session judge an edge
+case instead of blindly pattern-matching a rule. This is the mechanism that turns
+`preferences.md`'s seeded defaults into something actually earned. Append one line to
+`log.md`, same as the other three workflows.
 
 ## Working conventions
 
