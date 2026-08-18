@@ -1,0 +1,13 @@
+{
+  "name": "brain",
+  "owner": {
+    "name": "adezdev"
+  },
+  "plugins": [
+    {
+      "name": "brain",
+      "source": "./",
+      "description": "A persistent, git-versioned cross-project knowledge wiki for Claude Code — compile what you learn about a project once, keep it current, and stop re-deriving context from scratch every session."
+    }
+  ]
+}
