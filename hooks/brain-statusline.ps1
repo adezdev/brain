@@ -4,7 +4,7 @@
 # when no wiki exists yet — safe on fresh installs.
 #
 # Usage in %USERPROFILE%\.claude\settings.json:
-#   "statusLine": { "type": "command", "command": "powershell -ExecutionPolicy Bypass -File C:\path\to\brain-statusline.ps1" }
+#   "statusLine": { "type": "command", "command": "powershell -NoProfile -ExecutionPolicy Bypass -File C:\path\to\brain-statusline.ps1" }
 #
 # Plugin users: Claude will offer to set this up on first session.
 # Standalone users: add the line above to settings.json yourself.

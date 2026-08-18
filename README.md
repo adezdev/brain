@@ -138,7 +138,7 @@ Windows:
 
 ```json
 {
-  "statusLine": { "type": "command", "command": "powershell -ExecutionPolicy Bypass -File C:\\path\\to\\hooks\\brain-statusline.ps1" }
+  "statusLine": { "type": "command", "command": "powershell -NoProfile -ExecutionPolicy Bypass -File C:\\path\\to\\hooks\\brain-statusline.ps1" }
 }
 ```
 

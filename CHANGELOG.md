@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.5.1 — 2026-08-18
+
+Bug fix.
+
+- `hooks/brain-statusline-nudge.js` — the suggested Windows command was
+  `powershell -ExecutionPolicy Bypass -File "<path>"`, which loads the
+  user's PowerShell profile. On a machine with a profile that calls
+  `Set-PSReadLineOption -PredictionSource History`, that throws a
+  `Set-PSReadLineOption` error to stderr on every single statusline
+  render — the script's own output was correct underneath it, but the
+  noise polluted every render. Fixed by adding `-NoProfile`. Reproduced
+  both before and after locally: the old command prints the PSReadLine
+  error, the new one is clean.
+- `hooks/brain-statusline.ps1` and `README.md` had the same stale command
+  in their own documentation/example snippets — fixed both so the docs and
+  the nudge agree.
+
 ## 0.5.0 — 2026-08-18
 
 - `hooks/brain-statusline.sh` / `.ps1` — new statusline scripts, modeled on

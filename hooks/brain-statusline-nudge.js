@@ -34,7 +34,7 @@ try {
     const scriptName = isWindows ? 'brain-statusline.ps1' : 'brain-statusline.sh';
     const scriptPath = path.join(__dirname, scriptName);
     const command = isWindows
-      ? `powershell -ExecutionPolicy Bypass -File "${scriptPath}"`
+      ? `powershell -NoProfile -ExecutionPolicy Bypass -File "${scriptPath}"`
       : `bash "${scriptPath}"`;
     const statusLineSnippet =
       '"statusLine": { "type": "command", "command": ' + JSON.stringify(command) + ' }';
